@@ -6,18 +6,15 @@ using UnityEngine.UI;
 public class ConfigController : MonoBehaviour
 {
 
-    [SerializeField]
-    private Slider _sliderSequenceSize,
+    [SerializeField] private Slider _sliderSequenceSize,
                                     _sliderButtonNumber;
-    [SerializeField]
-    private Dropdown _dropdownBackgroundColor,
-                                      _dropdownSpeed,
-                                      _dropdownSonds,
+
+    [SerializeField] private Dropdown _dropdownBackgroundColor, 
+                                      _dropdownSpeed, 
+                                      _dropdownSonds, 
                                       _dropdownText;
 
-    [SerializeField]
-    private Text textSlider1,
-                                  textSlider2;
+    [SerializeField] private Text textSlider1, textSlider2;
 
     private static ConfigController _instance = null;
 
@@ -25,6 +22,7 @@ public class ConfigController : MonoBehaviour
     private List<string> _speedList;
     private List<string> _sondsList;
     private List<string> _typeList;
+    
 
 
     private void Start()
@@ -91,6 +89,8 @@ public class ConfigController : MonoBehaviour
         get { return _dropdownText; }
         set { _dropdownText = value; }
     }
+
+    
     #endregion
 
     private void InitializeLists()

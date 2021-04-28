@@ -15,11 +15,11 @@ public class GameControllerMod2 : MonoBehaviour
 
     public float speed;
 
-    public int[] caicai;
+    public int[] caicai; //<- Partitura
 
     public Color[] cor;
     public GameObject[] botoes;
-    //public GameObject startButton;
+
 
     public List<int> coresSeq;
     public int idResposta, tamanhoSeq,
@@ -27,10 +27,8 @@ public class GameControllerMod2 : MonoBehaviour
 
     private AudioSource fonteAudio;
     public AudioClip[] sons;
-    public AudioClip[] notasPiano;
-    //public AudioClip somAplausos;
+    public AudioClip[] caicaiNotas100, caicaiNotas80, caicaiNotas60;
 
-    //public GameObject buttonRepetir;
 
     public bool verificar;
 
@@ -60,16 +58,29 @@ public class GameControllerMod2 : MonoBehaviour
         fonteAudio = GetComponent<AudioSource>();
         speed = 0.5f;
         tamanhoSeq = Mathf.FloorToInt(SetConfig.Instance.SequenceSize);
-        SondSelect();
+        //SondSelect();
     }
 
-    void SondSelect()
+    void SondPlay(int c)
     {
-        int j = Mathf.FloorToInt(SetConfig.Instance.ButtonNumber);
-
-        for (int q = 0; q < j; q++)
+        Debug.Log(c);
+        if (SetConfig.Instance.MusicSpeed == 2)
         {
-            //sons[q] = notasPiano[q];
+            speed = 0.7f;
+            fonteAudio.PlayOneShot(caicaiNotas60[c]);
+            Debug.Log("Lento");
+        }
+        else if(SetConfig.Instance.MusicSpeed == 1)
+        {
+            speed = 0.6f;
+            fonteAudio.PlayOneShot(caicaiNotas80[c]);
+            Debug.Log("medio");
+        }
+        else
+        {
+            speed = 0.5f;
+            fonteAudio.PlayOneShot(caicaiNotas100[c]);
+            Debug.Log("rapido");
         }
 
     }
@@ -90,10 +101,6 @@ public class GameControllerMod2 : MonoBehaviour
 
         coresSeq.Clear();
 
-        //startButton.SetActive(true);
-        //rodadaTxt.text = string.Format("Rodada: {0}", rodada + 1);
-        //tamanhoSeqTxt.text = string.Format("Sequência: {0}", tamanhoSeq + rodada);
-
     }
 
     IEnumerator Sequencia(int qtd)
@@ -102,11 +109,11 @@ public class GameControllerMod2 : MonoBehaviour
         int c = 0;
         for (int r = qtd; r > 0; r--)
         {
-            Debug.Log("r");
-            Debug.Log(r);
+            //Debug.Log("r");
+            //Debug.Log(r);
             
-            Debug.Log("qtd");
-            Debug.Log(qtd);
+            //Debug.Log("qtd");
+            //Debug.Log(qtd);
 
             //Debug.Log(botoes.Length);
             //Debug.Log(Mathf.FloorToInt(SetConfig.Instance.ButtonNumber));
@@ -116,12 +123,12 @@ public class GameControllerMod2 : MonoBehaviour
             
             int i = caicai[c];
             botoes[i].SetActive(true);
-            fonteAudio.PlayOneShot(notasPiano[c]);
-            Debug.Log("c");
-            Debug.Log(c);
-            Debug.Log("i");
-            Debug.Log(i);
-            Debug.Log("----------");
+            SondPlay(c);
+            //Debug.Log("c");
+            //Debug.Log(c);
+            //Debug.Log("i");
+            //Debug.Log(i);
+           // Debug.Log("----------");
             GameController.Instance.coresSeq.Add(i);
             c += 1;
 

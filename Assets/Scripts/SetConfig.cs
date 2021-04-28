@@ -10,10 +10,10 @@ using UnityEngine.UI;
 
 public class SetConfig : MonoBehaviour
 {
-    [SerializeField]
-    private int _backgroundGameColor,
+    [SerializeField] private int _backgroundGameColor,
                                  _sonds,
-                                 _speed;
+                                 _speed, 
+                                 _musicSpeed;
 
 
     [SerializeField] public static int _text;
@@ -63,6 +63,11 @@ public class SetConfig : MonoBehaviour
         set { _text = value; }
     }
 
+    public int MusicSpeed
+    {
+        get { return _musicSpeed; }
+        set { _musicSpeed = value; }
+    }
 
     #endregion
 
@@ -96,17 +101,14 @@ public class SetConfig : MonoBehaviour
 
     public void CarregarCnfig()
     {
-
-
+  
     }
 
     public void CarregarMenu()
     {
 
-
-
-
     }
+
     public void Jogar()
     {
 
@@ -123,10 +125,20 @@ public class SetConfig : MonoBehaviour
 
     public void SelectButtonNumber() => ButtonNumber = ConfigController.Instance.SliderButtonNumber.value;
     public void SelectSequenceSize() => SequenceSize = ConfigController.Instance.SliderSequenceSize.value;
-    public void SelectSpeed() => Speed = ConfigController.Instance.DropdownSpeed.value;
     public void SelectBackgroundColor() => BackgroundGameColor = ConfigController.Instance.DropdownBackgroundColor.value;
     public void SelectSonds() => Sonds = ConfigController.Instance.DropdownSonds.value;
     public void SelectText() => TypeText = ConfigController.Instance.DropdownText.value;
+
+    public void SelectSpeed()
+    {
+        Speed = ConfigController.Instance.DropdownSpeed.value;
+
+        if (NextConfig.Instance.modo2 == true)
+        {
+            Speed = 0;
+            MusicSpeed = ConfigControllerMod2.Instance.DropdownSpeed.value;
+        }
+    }
 
     void Update()
     {
